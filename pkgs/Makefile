@@ -5,8 +5,6 @@ help:
 	@echo "Help:"
 	@echo "  clean    remove the downloaded files and eventualy the logs"
 	@echo "  libs     install the libraries for the loaded toolchain"
-	@echo "  lifex    install lifex dependencies for the loaded toolchain"
-	@echo "  extra    install extra packages for the loaded toolchain"
 	@echo "  install  install the libraries, lifex dependencies and extra packages for the loaded toolchain"
 
 clean:
@@ -28,40 +26,19 @@ libs:
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) p4est
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) suitesparse
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) mumps
-	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) superlu
-	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) hypre
-	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) eigen
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) hdf5
-	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) netcdf
-	#@"${mkPrefix}"/sbin/mkpkg $(mkFlags) scipy
-	#@"${mkPrefix}"/sbin/mkpkg $(mkFlags) pybind11
-	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) pnetcdf
-	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) matio
-	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) petsc
-	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) trilinos
-	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) adol-c
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) gsl
-	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) arborx
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) sundials
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) rapidjson
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) libtiff
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) libpng
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) graphicsmagick
-lifex:
-	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) dealii
-	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) vtk
-
-extra:
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) lis
-	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) cgal
-	#@"${mkPrefix}"/sbin/mkpkg $(mkFlags) fenics
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) qhull
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) qrupdate
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) octave
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) octave_file_io
-stat:
-	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) R
 
-install: libs lifex extra
+install: libs
 
-.PHONY: help clean libs lifex extra install
+.PHONY: help clean libs install
