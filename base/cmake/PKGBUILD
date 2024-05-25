@@ -14,12 +14,13 @@ build() {
 
   pushd $pkgname-$pkgver
     message "Configuring $pkgname"
+    export VERBOSE=1
+    export LC_ALL=C
     ./configure --prefix="$dstdir" --parallel=$pkgJobs \
-                --mandir=/share/man --docdir=/share/doc/cmake \
-                --no-system-libs --no-qt-gui \
-                --sphinx-man
+                --mandir=share/man --docdir=share/doc/cmake \
+                --no-system-libs --no-qt-gui 
     message "Compiling $pkgname"
-    make
+    LC_ALL=C make V=1 -j1
   popd
 }
 

@@ -80,12 +80,12 @@ run() {
   libelfurl=https://fossies.org/linux/misc/old/$libelfarchive
   libelfsum=c1d6ac5f182d19dd685c4dfd74eedbfe3992425d
 
-  linux=5.14
-  linuxver=5.14.21
+  linux=5.4
+  linuxver=5.4
   linuxdir=linux-$linuxver
   linuxarchive=linux-$linuxver.tar.xz
   linuxurl=https://www.kernel.org/pub/linux/kernel/v5.x/$linuxarchive
-  linuxsum=1aafc08fed37f01788b70b3f7bb20f0e53f0834f
+  linuxsum=98ae49ad49397d5a4dcb3ff9a082223edf7c5bbd
 
   glibcver=2.33
   glibcdir=glibc-$glibcver

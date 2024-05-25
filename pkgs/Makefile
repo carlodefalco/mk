@@ -38,6 +38,7 @@ libs:
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) qrupdate
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) octave
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) octave_file_io
+	##@"${mkPrefix}"/sbin/mkpkg $(mkFlags) nanoshaper
 
 install: libs
 

@@ -8,7 +8,7 @@ sum=1b20a1aae696f0c00fa27be426121c38eae25146
 dstdir=$mkToolchainBase
 
 build() {
-  download https://github.com/$pkgname-dev/$pkgname/archive/$archive
+  download https://github.com/$pkgname-dev/htop/releases/download/$pkgver/$pkgname-$pkgver.tar.xz
   check $archive $sum
   extract $archive
 

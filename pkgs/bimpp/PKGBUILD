@@ -1,0 +1,74 @@
+#!/bin/bash
+
+pkgname=bimpp
+pkgver=modifiche-vincenzo
+archive=$pkgname-$pkgver.tar.xz
+
+sum=5ae0c2d3368e8a8deb191bdfe10219b1bb9cf6ec
+
+dstdir=$mkToolchainPkgs/$pkgname/$pkgver
+
+build() {
+
+  ##download https://gitlab.iit.it/SDecherchi/$pkgname/-/archive/$pkgver/$pkgname-$pkgver.tar.bz2
+  
+  check $archive $sum
+  extract $archive
+
+  module load octave_file_io
+  module load mumps
+  module load lis
+  module load p4est
+  
+  message "configure and build"
+  pushd $pkgname
+    command mkdir BUILD
+    pushd BUILD
+      ../configure CC=mpicc --prefix=${dstdir} CXX=mpicxx \
+		   F77=mpif90 CPPFLAGS="-I$mkGlpkInc \
+           	     -I$mkSuitesparseInc  -I$mkFftwInc -I$mkMumpsInc -DBIM_TIMING" \
+		   LDFLAGS="-L$mkQrupdateLib -L$mkArpackLib -L$mkGlpkLib \
+             	   -L$mkSuitesparseLib -L$mkFftwLib -L$mkMumpsLib -L$mkScotchLib " \
+		   CXXFLAGS="-O3 " \
+		   --with-octave_file_io-home=${mkOctave_file_ioPrefix} \
+		   --with-mumps-home=$mkMumpsPrefix  \
+		   --with-lis-home=$mkLisPrefix --with-blas-lapack="-L$mkOpenblasLib -lopenblas" \
+		   --with-p4est-home=$mkP4estPrefix --with-octave-home=${mkOctavePrefix}/bin \
+		   --with-mumps-extra-libs="-lscotcherr -lbz2 -lmpi_usempif08 -lmpi_usempi_ignore_tkr \
+		   					           -lmpi_mpifh -lmpi"
+      make -j$pkgJobs
+    popd
+  popd  
+}
+
+
+package() {
+
+  make -j$pkgJobs -C $pkgname/BUILD install
+
+  strip "$dstdir/bin"
+  strip "$dstdir/lib"
+
+   if [[ "$mkTest" = "no" ]]; then
+    install -vd $mkToolchainModules/$pkgname
+    cat > $mkToolchainModules/$pkgname/$pkgver.lua << EOF
+-- -*- lua -*-
+whatis("A library for solvin (non)-linear Diffusion--Advection--Reaction Equations.")
+help([[
+Bimpp is installed in "\$mkBimppPrefix" directory.
+
+url: https://github.com/carlodefalco
+]])
+
+load("lis")
+load("mumps")
+load("p4est")
+load("octave_file_io")
+
+setenv("mkBimppPrefix", "$dstdir")
+setenv("mkBimppLib", "$dstdir/lib")
+setenv("mkBimppInc", "$dstdir/include")
+
+EOF
+  fi
+}

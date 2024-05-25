@@ -5,12 +5,12 @@ PREFIX=%PREFIX%
 # The vendor component of the triple (second component)
 VENDOR=mk
 PKGVERSION=${VENDOR}-2024.0
-BUGURL=https://github.com/pcafrica/mk/issues
+BUGURL=https://github.com/carlodefalco/mk/issues
 
 # Compiler flags
 # Compiler flags for the native cpu architecture can be retrieved with the
 # command gcc -march=native -Q --help=target (look for march).
-CFLAGS="-O2 -DNDEBUG -pipe -mtune=native"
+CFLAGS="-O2 -DNDEBUG -pipe -mtune=generic"
 CXXFLAGS=$CFLAGS
 FCFLAGS=$CFLAGS
 

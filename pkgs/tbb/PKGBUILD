@@ -44,7 +44,7 @@ url: https://software.intel.com/en-us/tbb
 ]])
 
 setenv("mkTbbPrefix", "$dstdir")
-setenv("mkTbbLib", "$dstdir/lib64")
+setenv("mkTbbLib", "$dstdir/lib")
 setenv("mkTbbInc", "$dstdir/include")
 
 prepend_path("LD_LIBRARY_PATH", "$dstdir/lib64")

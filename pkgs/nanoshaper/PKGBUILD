@@ -4,7 +4,7 @@ pkgname=nanoshaper
 pkgver=Nanoshaper_devel_TBB
 archive=$pkgname-$pkgver.tar.bz2
 
-sum=e8338319567868b99cef82e9afb9f406f2ddeadf
+sum=7e61af6fce2c3f8c6db41afef4e41547fb7acf25
 
 dstdir=$mkToolchainPkgs/$pkgname/$pkgver
 
@@ -46,8 +46,9 @@ build() {
     pushd build_lib
       cmake .. \
 	    -DTBB_DIR=$mkTbbLib/cmake/TBB  \
-	    -DCGAL_DIR=$dstdir/lib64/cmake/CGAL \
+	    -DCGAL_DIR=$dstdir/lib/cmake/CGAL \
 	    -DBoost_INCLUDE_DIR=$mkBoostInc \
+	    -DGMPXX_INCLUDE_DIR=$mkToolchainBase/include \
 	    -DCMAKE_BUILD_TYPE=Release
       make -j$pkgJobs
     popd
@@ -57,15 +58,13 @@ build() {
 
 package() {
 
-  install --mode=755 $pkgname-$pkgver/build_lib/*.so $dstdir/lib64/
+  install --mode=755 $pkgname-$pkgver/build_lib/*.so $dstdir/lib/
   install --mode=644 $pkgname-$pkgver/src/nanoshaper.h $dstdir/include
   
   rm -rf "$dstdir"/share/{appdata,applications,icons}
 
   strip "$dstdir/bin"
   strip "$dstdir/lib"
-
-  reset_rpath "$dstdir/bin/octave-config"
 
   if [[ "$mkTest" = "no" ]]; then
     install -vd $mkToolchainModules/$pkgname
@@ -82,7 +81,7 @@ load("tbb")
 load("boost")
 
 setenv("mkNanoshaperPrefix", "$dstdir")
-setenv("mkNanoshaperLib", "$dstdir/lib64")
+setenv("mkNanoshaperLib", "$dstdir/lib")
 setenv("mkNanoshaperInc", "$dstdir/include")
 
 EOF
