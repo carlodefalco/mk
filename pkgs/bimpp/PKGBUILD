@@ -48,6 +48,8 @@ package() {
 
   strip "$dstdir/bin"
   strip "$dstdir/lib"
+  reset_rpath "$dstdir"/bin
+  reset_rpath "$dstdir"/lib
 
    if [[ "$mkTest" = "no" ]]; then
     install -vd $mkToolchainModules/$pkgname
@@ -68,6 +70,8 @@ load("octave_file_io")
 setenv("mkBimppPrefix", "$dstdir")
 setenv("mkBimppLib", "$dstdir/lib")
 setenv("mkBimppInc", "$dstdir/include")
+
+prepend_path("LD_LIBRARY_PATH", "$dstdir/lib")
 
 EOF
   fi

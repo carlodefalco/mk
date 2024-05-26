@@ -111,6 +111,9 @@ load("sundials")
 setenv("mkOctavePrefix", "$dstdir")
 
 prepend_path("PATH", "$dstdir/bin")
+
+prepend_path("LD_LIBRARY_PATH", "$dstdir/lib/$pkgname/$pkgver")
+
 EOF
   fi
 }

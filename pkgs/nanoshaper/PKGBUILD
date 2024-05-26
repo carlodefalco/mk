@@ -59,13 +59,16 @@ build() {
 package() {
 
   install --mode=755 $pkgname-$pkgver/build_lib/*.so $dstdir/lib/
-  install --mode=644 $pkgname-$pkgver/src/nanoshaper.h $dstdir/include
+  install --mode=644 $pkgname-$pkgver/src/nanoshaper.h $pkgname-$pkgver/src/raytracer_datatype.h $dstdir/include
   
   rm -rf "$dstdir"/share/{appdata,applications,icons}
 
   strip "$dstdir/bin"
   strip "$dstdir/lib"
+  reset_rpath "$dstdir"/bin
+  reset_rpath "$dstdir"/lib
 
+  
   if [[ "$mkTest" = "no" ]]; then
     install -vd $mkToolchainModules/$pkgname
     cat > $mkToolchainModules/$pkgname/$pkgver.lua << EOF
@@ -83,6 +86,8 @@ load("boost")
 setenv("mkNanoshaperPrefix", "$dstdir")
 setenv("mkNanoshaperLib", "$dstdir/lib")
 setenv("mkNanoshaperInc", "$dstdir/include")
+
+prepend_path("LD_LIBRARY_PATH", "$dstdir/lib")
 
 EOF
   fi
