@@ -1,0 +1,27 @@
+#!/bin/bash
+
+pkgname=parallel
+pkgver=20240822
+archive=$pkgname-$pkgver.tar.bz2
+sum=6bdf8c4676b78ae510772a3397811ecb
+
+dstdir=$mkToolchainBase
+
+build() {
+  download https://mirror.kumi.systems/gnu/parallel/${pkgname}-${pkgver}.tar.bz2
+  check $archive $sum
+  extract $archive
+
+  pushd $pkgname-$pkgver
+    message "Configuring $pkgname-$pkgver"
+    ./configure --build=$TARGET --prefix="$dstdir" \
+                --mandir="$dstdir"/share/man \
+                --infodir="$dstdir"/share/info
+    message "Compiling $pkgname"
+    make
+  popd
+}
+
+package() {
+  make -C $pkgname-$pkgver install
+}

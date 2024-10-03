@@ -80,4 +80,5 @@ install:
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) openmpi
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) patchelf
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) chrpath
+	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) gnuparallel
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags)
