@@ -1,10 +1,10 @@
 #!/bin/bash
 
 pkgname=bimpp
-pkgver=modifiche-vincenzo
-archive=$pkgname-$pkgver.tar.xz
+pkgver=NextGenPB-v0.0.01
+archive=$pkgname-$pkgver.tar.gz
 
-sum=5ae0c2d3368e8a8deb191bdfe10219b1bb9cf6ec
+sum=aaa7c520513cce1e5b03723328c1a4ab
 
 dstdir=$mkToolchainPkgs/$pkgname/$pkgver
 
@@ -21,8 +21,9 @@ build() {
   module load p4est
 
   message "configure and build"
-  pushd $pkgname
-    command mkdir BUILD
+  pushd $pkgname-$pkgver
+    command ./autogen.sh
+    command mkdir BUILD      
     pushd BUILD
       ../configure CC=mpicc --prefix=${dstdir} CXX=mpicxx \
 		   F77=mpif90 CPPFLAGS="-I$mkGlpkInc \
@@ -44,7 +45,7 @@ build() {
 
 package() {
 
-  make -j$pkgJobs -C $pkgname/BUILD install
+  make -j$pkgJobs -C $pkgname-$pkgver/BUILD install
 
   strip "$dstdir/bin"
   strip "$dstdir/lib"

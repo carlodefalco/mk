@@ -60,6 +60,7 @@ install:
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) tcl
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) sphinx
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) icu
+	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) setuptools
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) libxml2
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) libidn2
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) curl

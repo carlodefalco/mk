@@ -59,9 +59,11 @@ extra:
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) qrupdate
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) octave
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) octave_file_io
+	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) bimpp
+	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) nanoshaper
 stat:
 	@"${mkPrefix}"/sbin/mkpkg $(mkFlags) R
 
-install: libs lifex extra
+install: libs extra lifex
 
 .PHONY: help clean libs lifex extra install

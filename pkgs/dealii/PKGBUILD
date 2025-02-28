@@ -1,14 +1,14 @@
 #!/bin/bash
 
 pkgname=dealii
-pkgver=9.5.1
+pkgver=9.6.2
 archive=$pkgname-$pkgver.tar.gz
-sum=a94989a9e4c3b8599aceacf71d7156621c1d7426
+sum=988d81118e4c7c8ddfd8028e85e7695d
 
 dstdir=$mkToolchainPkgs/$pkgname/$pkgver$suffix
 
 build() {
-  download https://github.com/dealii/$pkgname/releases/download/v$pkgver/$archive
+  download https://www.dealii.org/downloads/${archive}
   check $archive $sum
   extract $archive
 
