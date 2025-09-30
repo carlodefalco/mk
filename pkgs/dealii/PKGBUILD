@@ -1,9 +1,9 @@
 #!/bin/bash
 
 pkgname=dealii
-pkgver=9.6.2
+pkgver=9.7.1
 archive=$pkgname-$pkgver.tar.gz
-sum=988d81118e4c7c8ddfd8028e85e7695d
+sum=fdb362273c8bbe2b6d3b51120671eb70
 
 dstdir=$mkToolchainPkgs/$pkgname/$pkgver$suffix
 
