@@ -1,14 +1,14 @@
 #!/bin/bash
 
 pkgname=mumps
-pkgver=5.4.0
+pkgver=5.6.2
 archive=MUMPS_$pkgver.tar.gz
-sum=0f67a208c5a03fa3e968db4f7dfe58ea23d72bfa
+sum=adc38b6cca34dfcc8f7036b7d39cf260
 dstdir=$mkToolchainPkgs/$pkgname/$pkgver
 mkParallelBuild=no
 
 build() {
-  download http://graal.ens-lyon.fr/MUMPS/$archive
+  download https://mumps-solver.org/$archive
   check $archive $sum
   extract $archive
 

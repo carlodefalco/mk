@@ -24,6 +24,7 @@ build() {
               -D ENABLE_KLU=ON \
 	      -D KLU_INCLUDE_DIR="$mkSuitesparseInc" \
 	      -D KLU_LIBRARY="$mkSuitesparseLib"/libklu.so \
+	      -D ENABLE_MPI=ON \
 	      ..
 	message "Compiling $pkgname"
 	make -j$pkgJobs

@@ -25,7 +25,10 @@ build() {
   module load scalapack
   module load tbb
   module load trilinos
-
+  module load sundials
+  module load scotch
+  module load mumps
+  
   mkdir build
   pushd build
     message "Configuring $pkgname"
@@ -50,6 +53,9 @@ build() {
 	  -D HDF5_LIBRARY_DEBUG="$mkHdf5Lib/libhdf5.so" \
 	  -D HDF5_LIBRARY_RELEASE="$mkHdf5Lib/libhdf5.so" \
 	  -D DEAL_II_WITH_LAPACK=ON \
+	  -D DEAL_II_WITH_MUMPS=ON \
+	  -D MUMPS_DIR=$mkMumpsPrefix \
+	  -D SCOTCH_DIR="$mkScotchPrefix" \
 	  -D LAPACK_LIBRARIES="$mkOpenblasLib/libopenblas.so" \
 	  -D SCALAPACK_DIR="$mkScalapackPrefix" \
 	  -D DEAL_II_WITH_METIS=ON -D METIS_DIR="$mkMetisPrefix" \
@@ -61,6 +67,7 @@ build() {
 	  -D DEAL_II_WITH_TBB=ON -D TBB_DIR="$mkTbbPrefix" \
 	  -D TBB_INCLUDE_DIR="$mkTbbInc" \
 	  -D DEAL_II_WITH_TRILINOS=ON -D TRILINOS_DIR="$mkTrilinosPrefix" \
+	  -D DEAL_II_WITH_SUNDIALS=ON -D SUNDIALS_DIR="$mkSundialsPrefix" \
 	  -D DEAL_II_WITH_UMFPACK=ON -D UMFPACK_DIR="$mkSuitesparsePrefix" \
 	  -D DEAL_II_WITH_ZLIB=ON -D ZLIB_DIR="$mkToolchainBase/bin" \
 	  -D ZLIB_INCLUDE_DIR="$mkToolchainBase/include" \
@@ -104,6 +111,8 @@ load("petsc")
 load("scalapack")
 load("tbb")
 load("trilinos")
+load("sundials")
+load("mumps")
 
 setenv("mkDealiiPrefix", "$dstdir")
 setenv("mkDealiiLib", "$dstdir/lib")
